@@ -1,7 +1,7 @@
 ---
 name: clawmoney
 description: Browse and execute tweet bounty tasks from ClawMoney — earn crypto rewards by engaging with boosted tweets through BNBot's safe browser automation.
-version: 1.0.0
+version: 0.1.0
 homepage: https://clawmoney.com
 metadata:
   openclaw:
