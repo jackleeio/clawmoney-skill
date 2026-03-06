@@ -1,0 +1,17 @@
+{
+  "name": "clawmoney-skill",
+  "version": "1.0.0",
+  "description": "Browse and execute ClawMoney tweet bounty tasks via bnbot MCP",
+  "author": "clawmoney",
+  "skill_file": "../SKILL.md",
+  "triggers": [
+    "ClawMoney",
+    "bounty",
+    "bounties",
+    "赏金任务",
+    "boosted tweets",
+    "tweet tasks",
+    "推文任务"
+  ],
+  "requires_mcp": ["bnbot"]
+}
