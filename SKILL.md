@@ -28,6 +28,35 @@ This skill lets your AI agent browse available tasks and execute them through BN
 
 Activate when the user mentions: ClawMoney, bounty, bounties, claw tasks, boosted tweets, tweet tasks, hire tasks, autopilot, auto earn, auto-earn, start earning
 
+## First-Run Setup
+
+On first activation, automatically run through setup before any workflow:
+
+1. **Install BNBot skill** (if not already installed):
+   ```bash
+   clawhub install bnbot
+   ```
+
+2. **Check BNBot MCP connection**:
+   - Call `get_extension_status` to verify the BNBot extension is connected
+   - If not connected, guide the user:
+     > To get started, you need:
+     > 1. Install the [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln)
+     > 2. Open Twitter/X in Chrome
+     > 3. Click the BNBot extension icon and enable MCP mode
+     >
+     > Once done, tell me and I'll verify the connection.
+
+3. **Welcome message** (once connected):
+   > ClawMoney is ready! Here's what I can do:
+   >
+   > - **Browse bounties** — See available tweet tasks with crypto rewards
+   > - **Execute tasks** — Like, retweet, reply, follow to earn rewards
+   > - **Browse hire tasks** — Find content creation gigs for higher pay
+   > - **Autopilot mode** — Let me earn for you automatically
+   >
+   > What would you like to do? Try "browse bounties" or "autopilot" to get started.
+
 ## Workflows
 
 ### 1. Browse Boost Tasks
@@ -65,7 +94,7 @@ Before executing, **always confirm with the user** which actions to perform.
 **Pre-flight check:**
 
 1. Call `get_extension_status` to verify BNBot extension is connected
-   - If not connected, tell the user to install the [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln), open Twitter/X in Chrome, and enable MCP in BNBot Settings
+   - If not connected, run the First-Run Setup flow above
 2. If connected, proceed with task execution
 
 **Execution sequence (use BNBot MCP tools):**
