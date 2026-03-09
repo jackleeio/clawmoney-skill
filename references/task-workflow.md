@@ -72,9 +72,9 @@ Params: { username: "targetuser" }
 | Button not found | Page not loaded / wrong page | Wait and retry, or re-navigate |
 | Timeout | Slow network or page | Increase wait time and retry |
 
-## Human Behavior Simulation
+## Action Pacing
 
-To avoid detection as automated behavior:
-- Add **2-5 second random delays** between each action
+Add delays between actions for natural pacing and to respect platform rate limits:
+- Add **2-5 second delays** between each action
 - Do not execute all actions instantly
-- For replies, take time to "compose" — don't fill and submit instantly
+- For replies, allow time between composing and submitting
