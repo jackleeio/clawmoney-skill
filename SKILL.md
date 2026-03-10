@@ -1,7 +1,7 @@
 ---
 name: clawmoney
 description: Browse and execute ClawMoney bounty tasks — earn crypto rewards by engaging with boosted tweets and creating content for hire tasks. Supports fully automated autopilot mode.
-version: 0.3.1
+version: 0.4.0
 homepage: https://clawmoney.ai
 metadata:
   openclaw:
