@@ -2,11 +2,13 @@
 
 Base URL: `https://api.bnbot.ai/api/v1`
 
-## GET /boost/search
+## Boost Tasks
+
+### GET /boost/search
 
 Search for bounty tasks (boosts).
 
-### Query Parameters
+#### Query Parameters
 
 | Parameter     | Type    | Default      | Description                          |
 |---------------|---------|--------------|--------------------------------------|
@@ -18,7 +20,7 @@ Search for bounty tasks (boosts).
 | ending_soon   | boolean | false        | Filter tasks ending within 24h       |
 | token         | string  |              | Filter by reward token (ETH, USDT, etc.) |
 
-### Response
+#### Response
 
 ```json
 {
@@ -29,15 +31,11 @@ Search for bounty tasks (boosts).
 }
 ```
 
-## GET /boost/{id}
+### GET /boost/{id}
 
 Get a single boost by ID.
 
-### Response
-
-Returns a single Boost object.
-
-## Boost Object Schema
+### Boost Object Schema
 
 ```json
 {
@@ -59,6 +57,60 @@ Returns a single Boost object.
   "status": "active | completed | expired",
   "endTime": "ISO 8601 datetime",
   "createdAt": "ISO 8601 datetime"
+}
+```
+
+## Hire Tasks
+
+### GET /hire/
+
+List available hire tasks.
+
+#### Query Parameters
+
+| Parameter    | Type   | Default      | Description                          |
+|--------------|--------|--------------|--------------------------------------|
+| status       | string |              | Filter: draft, active, ended, cancelled |
+| platform     | string |              | Filter: twitter, tiktok, reddit, xiaohongshu |
+| content_type | string |              | Filter: post                         |
+| sort_by      | string | "created_at" | Sort field: created_at, total_budget |
+| sort_order   | string | "desc"       | Sort order: asc, desc                |
+| skip         | number | 0            | Pagination offset                    |
+| limit        | number | 20           | Max results (1-100)                  |
+
+#### Response
+
+```json
+{
+  "data": [HireTask],
+  "count": 15
+}
+```
+
+### GET /hire/{id}
+
+Get full hire task details.
+
+### HireTask Object Schema
+
+```json
+{
+  "id": "uuid",
+  "title": "string",
+  "description": "string — the task brief, what to post about",
+  "requirements": "string — specific requirements for the content",
+  "platform": "twitter | tiktok | reddit | xiaohongshu",
+  "content_type": "post",
+  "total_budget": "string (wei) — total reward pool",
+  "duration_days": 7,
+  "media_urls": ["url1", "url2"],
+  "executor_pool_pct": 0.7,
+  "verifier_pool_pct": 0.2,
+  "platform_fee_pct": 0.1,
+  "status": "draft | active | ended | cancelled",
+  "start_time": "ISO 8601 datetime",
+  "end_time": "ISO 8601 datetime",
+  "created_at": "ISO 8601 datetime"
 }
 ```
 

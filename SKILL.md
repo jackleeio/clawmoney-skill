@@ -1,14 +1,25 @@
 ---
 name: clawmoney
 description: Browse and execute ClawMoney bounty tasks — earn crypto rewards by engaging with boosted tweets and creating content for hire tasks. Supports fully automated autopilot mode.
-version: 0.2.0
-homepage: https://clawmoney.com
+version: 0.3.0
+homepage: https://clawmoney.ai
 metadata:
   openclaw:
     emoji: "\U0001F4B0"
     os: [darwin, linux, windows]
     requires:
       skills: [bnbot]
+      bins: [bnbot-mcp-server]
+    install:
+      - id: bnbot-skill
+        kind: skill
+        package: bnbot
+        label: Install BNBot skill (dependency)
+      - id: bnbot-mcp
+        kind: node
+        package: bnbot-mcp-server
+        bins: [bnbot-mcp-server]
+        label: Install bnbot-mcp-server (npm)
 ---
 
 # ClawMoney - Earn Crypto with Your AI Agent
@@ -20,8 +31,8 @@ ClawMoney is a crypto rewards platform with two earning modes:
 
 This skill lets your AI agent browse available tasks and execute them through BNBot's browser automation. It supports **autopilot mode** for fully automated earning.
 
-- **Platform**: [ClawMoney](https://clawmoney.com)
-- **Requires**: [BNBot Skill](https://clawhub.ai/skills/bnbot) (dependency) + [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln)
+- **Platform**: [ClawMoney](https://clawmoney.ai)
+- **Requires**: [BNBot Skill](https://clawhub.ai/skills/bnbot) + [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln) (auto-installed on first run)
 - **API**: Reads task data from `api.bnbot.ai` (GET-only, no auth required, no user data sent)
 
 ## Trigger
@@ -30,32 +41,41 @@ Activate when the user mentions: ClawMoney, bounty, bounties, claw tasks, booste
 
 ## First-Run Setup
 
-On first activation, automatically run through setup before any workflow:
+On first activation, run the automated setup script. This handles all dependency installation and MCP configuration in one step:
 
-1. **Install BNBot skill** (if not already installed):
-   ```bash
-   clawhub install bnbot
-   ```
+```bash
+bash <skill_dir>/scripts/setup.sh
+```
 
-2. **Check BNBot MCP connection**:
-   - Call `get_extension_status` to verify the BNBot extension is connected
-   - If not connected, guide the user:
-     > To get started, you need:
+The setup script automatically:
+1. Checks & installs the **bnbot skill** via `clawhub install bnbot`
+2. Checks & installs **bnbot-mcp-server** via `npm install -g bnbot-mcp-server`
+3. Checks & configures **`.mcp.json`** with the bnbot MCP server entry
+
+**After setup completes:**
+
+- If the script reports "MCP config was updated", tell the user:
+  > Setup complete! Please **restart Claude Code** to activate the BNBot MCP connection, then come back and say "clawmoney" again.
+
+- If MCP tools are already available, verify the Chrome extension connection:
+  1. Call `get_extension_status` to check if the BNBot extension is connected
+  2. If not connected, guide the user:
+     > Almost ready! You just need to connect the BNBot Chrome Extension:
      > 1. Install the [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln)
      > 2. Open Twitter/X in Chrome
-     > 3. Click the BNBot extension icon and enable MCP mode
+     > 3. Click the BNBot extension icon and enable **MCP mode**
      >
      > Once done, tell me and I'll verify the connection.
 
-3. **Welcome message** (once connected):
-   > ClawMoney is ready! Here's what I can do:
-   >
-   > - **Browse bounties** — See available tweet tasks with crypto rewards
-   > - **Execute tasks** — Like, retweet, reply, follow to earn rewards
-   > - **Browse hire tasks** — Find content creation gigs for higher pay
-   > - **Autopilot mode** — Let me earn for you automatically
-   >
-   > What would you like to do? Try "browse bounties" or "autopilot" to get started.
+- **Welcome message** (once everything is connected):
+  > ClawMoney is ready! Here's what I can do:
+  >
+  > - **Browse bounties** — See available tweet tasks with crypto rewards
+  > - **Execute tasks** — Like, retweet, reply, follow to earn rewards
+  > - **Browse hire tasks** — Find content creation gigs for higher pay
+  > - **Autopilot mode** — Let me earn for you automatically
+  >
+  > What would you like to do? Try "browse bounties" or "autopilot" to get started.
 
 ## Workflows
 

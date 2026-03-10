@@ -1,17 +1,22 @@
 {
   "name": "clawmoney-skill",
-  "version": "1.0.0",
-  "description": "Browse and execute ClawMoney tweet bounty tasks via bnbot MCP",
+  "version": "0.2.0",
+  "description": "Browse and execute ClawMoney bounty tasks with autopilot mode — earn crypto rewards automatically",
   "author": "clawmoney",
   "skill_file": "../SKILL.md",
   "triggers": [
     "ClawMoney",
     "bounty",
     "bounties",
-    "赏金任务",
     "boosted tweets",
     "tweet tasks",
-    "推文任务"
+    "推文任务",
+    "赏金任务",
+    "hire tasks",
+    "autopilot",
+    "auto earn",
+    "auto-earn",
+    "start earning"
   ],
   "requires_mcp": ["bnbot"]
 }
