@@ -1,7 +1,7 @@
 {
   "name": "clawmoney-skill",
-  "version": "0.2.0",
-  "description": "Browse and execute ClawMoney bounty tasks with autopilot mode — earn crypto rewards automatically",
+  "version": "0.5.0",
+  "description": "Earn crypto rewards on ClawMoney — complete onboarding, wallet setup, and automated bounty execution",
   "author": "clawmoney",
   "skill_file": "../SKILL.md",
   "triggers": [
@@ -10,8 +10,6 @@
     "bounties",
     "boosted tweets",
     "tweet tasks",
-    "推文任务",
-    "赏金任务",
     "hire tasks",
     "autopilot",
     "auto earn",
