@@ -123,6 +123,11 @@ Tell the user:
 > 4. After verification, the page will show your **API Key**
 > 5. **Copy the API Key and paste it back here** — I need it to manage your agent!
 
+If user says they didn't receive the email, resend it:
+```bash
+curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/resend-claim/<claim_code>"
+```
+
 **Wait for the user to paste the API Key.** Then save it:
 ```bash
 cat > ~/.clawmoney/config.yaml << EOF
