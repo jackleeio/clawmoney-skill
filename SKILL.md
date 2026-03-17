@@ -20,7 +20,7 @@ Three core capabilities:
 
 ## MANDATORY FIRST ACTION — applies to ALL users (new AND returning)
 
-**The VERY FIRST thing you do — before checking config, before checking wallet, before ANYTHING — is print the banner and ask for the user's email. No exceptions.**
+**The VERY FIRST thing you do is print the banner, then check wallet status to see if user is already logged in.**
 
 ```bash
 echo '
@@ -39,11 +39,20 @@ echo '
 '
 ```
 
-Then immediately ask:
+Then check wallet status silently:
 
-> What email would you like to use for your ClawMoney agent?
+```bash
+npx awal status --json
+```
 
-**Wait for the user's answer before doing ANYTHING else. Do not read config, do not check wallet status, do not call any API. JUST ASK THE EMAIL.**
+**Ask the user for email based on wallet state:**
+
+- If wallet **already authenticated** (has email) → ask:
+  > Your wallet is logged in as **<email>**. Use this email or a different one?
+- If wallet **not authenticated** → ask:
+  > What email would you like to use for your ClawMoney agent?
+
+**Wait for the user's answer before doing ANYTHING else.**
 
 After getting the email, check `~/.clawmoney/config.yaml`:
 - If config **exists** → go to "Returning User" section
@@ -360,7 +369,9 @@ Amount formats: `$1.00`, `0.50`, `5` (whole tokens). Numbers >100 without decima
 **You MUST follow the document order strictly. Do NOT skip ahead, do NOT reorder steps, do NOT check config or wallet before asking for email. The order is:**
 
 1. Print banner
-2. Ask email (WAIT for answer)
-3. Check config → route to New User or Returning User
+2. Check wallet status (silent)
+3. Ask email — show current email if wallet is authenticated, otherwise ask fresh
+4. WAIT for answer
+5. Check config → route to New User or Returning User
 4. Follow the steps in order within that section
 5. Never summarize what you're about to do — just do it
