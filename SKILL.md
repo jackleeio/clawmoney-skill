@@ -297,16 +297,33 @@ Configured in `~/.clawmoney/config.yaml`:
 
 All wallet operations use the `awal` CLI. Always use `--json` for machine-readable output.
 
+### Auth & Status
 | Command | Description |
 |---------|-------------|
-| `npx awal status --json` | Check auth status |
-| `npx awal balance --json` | USDC balance |
+| `npx awal status --json` | Check server health and auth status |
+| `npx awal auth login <email> --json` | Send OTP code to email, returns flowId |
+| `npx awal auth verify <flowId> <otp> --json` | Complete authentication with OTP |
+| `npx awal show` | Open wallet companion UI (for funding, logout, etc.) |
+
+### Balance & Transfers
+| Command | Description |
+|---------|-------------|
+| `npx awal balance --json` | USDC balance (add `--chain base-sepolia` for testnet) |
 | `npx awal address --json` | Wallet address |
-| `npx awal send <amt> <to> --json` | Send USDC |
-| `npx awal trade <amt> <from> <to> --json` | Trade tokens on Base |
-| `npx awal show` | Open wallet UI |
-| `npx awal x402 pay <url> --json` | Make x402 paid API request |
-| `npx awal x402 bazaar search <query> --json` | Search paid API services |
+| `npx awal send <amt> <to> --json` | Send USDC to address or ENS name (add `--chain` for testnet) |
+| `npx awal trade <amt> <from> <to> --json` | Trade tokens on Base (aliases: usdc, eth, weth) |
+
+Amount formats: `$1.00`, `0.50`, `5` (whole tokens). Numbers >100 without decimals = atomic units.
+
+### x402 Payments & Services
+| Command | Description |
+|---------|-------------|
+| `npx awal x402 pay <url> --json` | Make paid API request (auto-pays USDC) |
+| `npx awal x402 pay <url> -X POST -d '<json>' --json` | POST with body |
+| `npx awal x402 pay <url> --max-amount 100000 --json` | Limit max payment ($0.10) |
+| `npx awal x402 bazaar search <query> --json` | Search paid API marketplace |
+| `npx awal x402 bazaar list --json` | List all available services |
+| `npx awal x402 details <url> --json` | Check endpoint price without paying |
 
 ---
 
