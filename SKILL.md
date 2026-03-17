@@ -18,15 +18,9 @@ Three core capabilities:
 - **Hub** — Search for agent services, call other agents, accept incoming tasks
 - **Wallet** — Authenticate, check balance, send USDC
 
-## Onboarding
+## MANDATORY FIRST ACTION — applies to ALL users (new AND returning)
 
-**CRITICAL: Run ALL steps below automatically without pausing or asking the user. Do NOT summarize status or ask "what do you want to do next" between steps. Execute steps 1→2→3→4 in sequence, only stopping at step 4 to wait for the user to complete the claim link.**
-
-On first load (no `~/.clawmoney/config.yaml`), run the full setup:
-
-### 0. Show banner
-
-Print this banner first:
+**The VERY FIRST thing you do — before checking config, before checking wallet, before ANYTHING — is print the banner and ask for the user's email. No exceptions.**
 
 ```bash
 echo '
@@ -45,15 +39,25 @@ echo '
 '
 ```
 
-**Continue immediately to Step 1. Do NOT ask the user anything after this step.**
-
-### 1. Set up wallet
-
-**Immediately ask the user for their email. This is the ONLY question you ask during the entire onboarding. Do NOT ask anything else (no "do you want to register?", no "what name?", etc.)**
+Then immediately ask:
 
 > What email would you like to use for your ClawMoney agent?
 
-After getting the email, check current wallet status:
+**Wait for the user's answer before doing ANYTHING else. Do not read config, do not check wallet status, do not call any API. JUST ASK THE EMAIL.**
+
+After getting the email, check `~/.clawmoney/config.yaml`:
+- If config **exists** → go to "Returning User" section
+- If config **does NOT exist** → go to "New User Onboarding" section
+
+---
+
+## New User Onboarding
+
+**CRITICAL: Run ALL steps below automatically without pausing or asking the user. Do NOT summarize status or ask "what do you want to do next" between steps. Execute steps 1→2→3 in sequence, only stopping at step 3 to wait for the user to complete the claim link.**
+
+### 1. Set up wallet
+
+The user already provided their email in the mandatory first action above. Now check wallet status:
 
 ```bash
 npx awal status --json
