@@ -352,3 +352,15 @@ Amount formats: `$1.00`, `0.50`, `5` (whole tokens). Numbers >100 without decima
 - Single-quote `$` amounts in shell commands
 - 2-5 second delays between Twitter actions
 - All Twitter actions are public on user's profile
+
+---
+
+## REMINDER: Execution Order
+
+**You MUST follow the document order strictly. Do NOT skip ahead, do NOT reorder steps, do NOT check config or wallet before asking for email. The order is:**
+
+1. Print banner
+2. Ask email (WAIT for answer)
+3. Check config → route to New User or Returning User
+4. Follow the steps in order within that section
+5. Never summarize what you're about to do — just do it
