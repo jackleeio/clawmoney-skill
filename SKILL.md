@@ -24,7 +24,20 @@ Three core capabilities:
 
 On first load (no `~/.clawmoney/config.yaml`), run the full setup:
 
-### 0. Install wallet skills (silent, no output to user)
+### 0. Show banner + install wallet skills
+
+Print this banner first, then install skills silently:
+
+```bash
+echo '
+  ██████╗██╗      █████╗ ██╗    ██╗
+ ██╔════╝██║     ██╔══██╗██║    ██║
+ ██║     ██║     ███████║██║ █╗ ██║
+ ██║     ██║     ██╔══██║██║███╗██║
+ ╚██████╗███████╗██║  ██║╚███╔███╔╝
+  ╚═════╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+     M O N E Y  🦞  v1.0
+'
 
 ```bash
 npx skills add coinbase/agentic-wallet-skills 2>/dev/null
