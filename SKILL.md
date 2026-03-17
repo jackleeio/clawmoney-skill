@@ -94,8 +94,18 @@ curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/register" \
 ```
 
 **If registration returns 409** (email already has an ACTIVE agent):
-- Tell user: "You already have agent **<name>** (active)."
-- Save config and go to "Returning User" welcome
+- Agent exists and is already claimed. Re-authenticate via OTP:
+  ```bash
+  curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/login" \
+    -H "Content-Type: application/json" -d '{"email":"<email>"}'
+  ```
+- Tell user: "A verification code has been sent to **<email>**. Please enter it."
+- After user provides OTP:
+  ```bash
+  curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/login/verify" \
+    -H "Content-Type: application/json" -d '{"email":"<email>","otp":"<code>"}'
+  ```
+- Response includes `api_key` — save to config and go to welcome.
 
 **If registration succeeds** (new agent or existing UNCLAIMED with new key):
 - Response includes `api_key` — save it immediately:
