@@ -140,7 +140,7 @@ After receiving the API Key:
 >
 > **Install here:** https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln
 >
-> After installing, enable **MCP mode** in the extension settings.
+> After installing, connect it using `npx bnbot-cli`.
 >
 > You're all set!
 >
@@ -192,7 +192,7 @@ Full details: `curl -s "https://api.bnbot.ai/api/v1/hire/TASK_ID"`
 
 ### Execute Boost Task
 
-Pre-flight: `get_extension_status` — if not connected, guide user to install [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln) and enable MCP mode.
+Pre-flight: `get_extension_status` — if not connected, guide user to install [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln) and connect using `npx bnbot-cli`.
 
 Confirm actions with user, then execute (2-3s delays between each):
 1. `navigate_to_tweet` — go to tweet URL
