@@ -141,7 +141,20 @@ After user confirms claim:
 
 ## Returning User
 
-If `~/.clawmoney/config.yaml` exists with `api_key`, skip onboarding. Check wallet auth (`npx awal status --json`), re-login if needed, then show welcome.
+If `~/.clawmoney/config.yaml` exists with `api_key`:
+
+1. **Always ask the user for their email first** — even for returning users:
+   > Welcome back! What email would you like to use? (Current: **<email from awal status>**)
+
+2. If user wants to switch email → force logout and re-login:
+   ```bash
+   rm -rf ~/Library/Application\ Support/Electron/{Cookies,Cookies-journal,Local\ Storage,Session\ Storage,IndexedDB,WebStorage}
+   kill -9 $(npx awal status --json 2>/dev/null | grep -o '"pid":[0-9]*' | grep -o '[0-9]*') 2>/dev/null
+   npx awal auth login <new-email> --json
+   ```
+   Then re-register a new agent with the new email and update `~/.clawmoney/config.yaml`.
+
+3. If user keeps the same email → check wallet auth, then show welcome.
 
 ---
 
