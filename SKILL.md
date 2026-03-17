@@ -186,17 +186,11 @@ Options: `--status active`, `--platform twitter`, `--limit 10`
 
 Full details: `curl -s "https://api.bnbot.ai/api/v1/hire/TASK_ID"`
 
-### Execute Boost Task (requires BNBot)
+### Execute Boost Task
 
-Tasks are executed via **bnbot-cli** (MCP server for BNBot Chrome Extension). If bnbot tools are not available, install the bnbot skill:
+Use BNBot tools to engage with the tweet. Requires [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln) + [bnbot-cli](https://github.com/bnbot-ai/bnbot-cli).
 
-```bash
-curl -s https://raw.githubusercontent.com/bnbot-ai/bnbot-skill/main/SKILL.md > ~/.claude/skills/bnbot/SKILL.md
-```
-
-Or read the full docs: `https://github.com/bnbot-ai/bnbot-skill`
-
-Pre-flight: `get_extension_status` — if not connected, guide user to install [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln).
+Pre-flight: `get_extension_status` — if not connected, guide user to install extension.
 
 Confirm actions with user, then execute (2-3s delays between each):
 1. `navigate_to_tweet` — go to tweet URL
