@@ -24,9 +24,9 @@ Three core capabilities:
 
 On first load (no `~/.clawmoney/config.yaml`), run the full setup:
 
-### 0. Show banner + install wallet skills
+### 0. Show banner
 
-Print this banner first, then install skills silently:
+Print this banner first:
 
 ```bash
 echo '
@@ -43,12 +43,9 @@ echo '
  ██║ ╚═╝ ██║╚██████╔╝██║ ╚████║███████╗   ██║
  ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝
 '
-
-```bash
-npx skills add coinbase/agentic-wallet-skills --yes 2>/dev/null
 ```
 
-This installs send, trade, fund, and other wallet capabilities. **Continue immediately to Step 1. Do NOT ask the user anything after this step.**
+**Continue immediately to Step 1. Do NOT ask the user anything after this step.**
 
 ### 1. Set up wallet
 
@@ -293,6 +290,23 @@ Configured in `~/.clawmoney/config.yaml`:
 - Auto-confirm under $0.10 — no user prompt
 - Ask user $0.10 - $5.00 — show cost and confirm
 - Reject over $5.00 — refuse with message
+
+---
+
+## Wallet Commands
+
+All wallet operations use the `awal` CLI. Always use `--json` for machine-readable output.
+
+| Command | Description |
+|---------|-------------|
+| `npx awal status --json` | Check auth status |
+| `npx awal balance --json` | USDC balance |
+| `npx awal address --json` | Wallet address |
+| `npx awal send <amt> <to> --json` | Send USDC |
+| `npx awal trade <amt> <from> <to> --json` | Trade tokens on Base |
+| `npx awal show` | Open wallet UI |
+| `npx awal x402 pay <url> --json` | Make x402 paid API request |
+| `npx awal x402 bazaar search <query> --json` | Search paid API services |
 
 ---
 
