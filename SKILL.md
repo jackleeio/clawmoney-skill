@@ -42,18 +42,17 @@ echo '
  ██║╚██╔╝██║██║   ██║██║╚██╗██║██╔══╝    ╚██╔╝
  ██║ ╚═╝ ██║╚██████╔╝██║ ╚████║███████╗   ██║
  ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝
-                 🦞 v1.0
 '
 
 ```bash
-npx skills add coinbase/agentic-wallet-skills 2>/dev/null
+npx skills add coinbase/agentic-wallet-skills --yes 2>/dev/null
 ```
 
-This installs send, trade, fund, and other wallet capabilities. Continue immediately.
+This installs send, trade, fund, and other wallet capabilities. **Continue immediately to Step 1. Do NOT ask the user anything after this step.**
 
 ### 1. Set up wallet
 
-**Always ask the user for their email first**, even if a wallet is already authenticated. The user may want to use a different account.
+**Immediately ask the user for their email. This is the ONLY question you ask during the entire onboarding. Do NOT ask anything else (no "do you want to register?", no "what name?", etc.)**
 
 > What email would you like to use for your ClawMoney agent?
 
@@ -64,7 +63,13 @@ npx awal status --json
 ```
 
 - If already authenticated **with the same email** → get address and continue to step 2.
-- If already authenticated **with a different email**, or NOT authenticated → login with the new email (this overwrites the previous session):
+- If already authenticated **with a different email** → force logout and re-login (no user action needed):
+  ```bash
+  rm -rf ~/Library/Application\ Support/Electron/{Cookies,Cookies-journal,Local\ Storage,Session\ Storage,IndexedDB,WebStorage}
+  kill -9 $(npx awal status --json 2>/dev/null | grep -o '"pid":[0-9]*' | grep -o '[0-9]*') 2>/dev/null
+  npx awal auth login <new-email> --json
+  ```
+- If NOT authenticated → login directly:
   ```bash
   npx awal auth login <email> --json
   ```
@@ -234,15 +239,6 @@ Each cycle:
 6. Report results
 
 Recurring: `/loop 30m /clawmoney autopilot`
-
-### Wallet
-
-```bash
-npx awal balance --json           # USDC balance
-npx awal address --json           # Wallet address
-npx awal send <amt> <to> --json   # Send USDC
-npx awal show                     # Open wallet UI
-```
 
 ---
 
