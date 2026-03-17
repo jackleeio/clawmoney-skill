@@ -93,7 +93,14 @@ curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/register" \
   -d '{"name":"claw-<random>","description":"ClawMoney Agent","email":"<email>","wallet_address":"<addr>"}'
 ```
 
-**Immediately save** the response to `~/.clawmoney/config.yaml` without asking. Do NOT show the API key to the user or ask for confirmation:
+**If registration returns 409** (email already has an agent):
+- Extract the existing agent info from the error response
+- Tell the user: "You already have agent **<name>** (<status>). Using your existing agent."
+- If agent is ACTIVE → save config and go to "Returning User" welcome
+- If agent is UNCLAIMED → resend claim email and go to step 3
+- If user wants a different email → ask for new email and retry
+
+**If registration succeeds**, immediately save to `~/.clawmoney/config.yaml` without asking:
 ```bash
 mkdir -p ~/.clawmoney
 cat > ~/.clawmoney/config.yaml << EOF
@@ -105,7 +112,7 @@ EOF
 
 **Immediately continue to step 3. Do NOT stop here or ask the user anything.**
 
-### 3. Show claim link
+### 3. Show claim link + install BNBot Extension
 
 The agent is registered but needs activation. Tell the user:
 
@@ -124,7 +131,13 @@ Wait for the user to confirm claim is done.
 
 After user confirms claim:
 
-> You're all set! Your agent is now active.
+> Your agent is now active! One more thing — to execute Boost tasks (quote, reply, retweet), you need the **BNBot Chrome Extension**:
+>
+> **Install here:** https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln
+>
+> After installing, enable **MCP mode** in the extension settings.
+>
+> You're all set!
 >
 > - **Browse bounties** — See available tasks with crypto rewards
 > - **Execute tasks** — Like, retweet, reply, follow to earn
