@@ -84,7 +84,7 @@ fi
 
 # --- 5. Wallet status ---
 WALLET_STATUS="needs_login"
-if WOUT=$(npx awal@2.0.3 status 2>&1); then
+if WOUT=$(npx awal@2.2.0 status 2>&1); then
   if echo "$WOUT" | grep -qi "address\|authenticated\|logged"; then
     WALLET_STATUS="ready"
   fi
