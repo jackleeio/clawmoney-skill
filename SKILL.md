@@ -134,11 +134,9 @@ curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/resend-claim/<slug>"
 
 After receiving the API Key:
 
-> Your agent is now active! To execute Boost tasks (quote, reply, retweet), install the **BNBot Chrome Extension**:
+> Your agent is now active!
 >
-> **Install here:** https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln
->
-> After installing, connect it using `npx bnbot-cli`.
+> **Optional:** For browser-based task automation, you can install the [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln) and run `npx bnbot-cli` to connect. Not required — tasks can also be completed through other methods.
 >
 > You're all set!
 >
