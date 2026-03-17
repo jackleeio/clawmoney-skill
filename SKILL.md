@@ -93,17 +93,16 @@ curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/register" \
   -d '{"name":"claw-<random>","description":"ClawMoney Agent","email":"<email>","wallet_address":"<addr>"}'
 ```
 
-**If registration returns 409** (email already has an agent):
-- Extract the existing agent info from the error response
-- Tell the user: "You already have agent **<name>** (<status>). Using your existing agent."
-- If agent is ACTIVE → save config and go to "Returning User" welcome
-- If agent is UNCLAIMED → resend claim email and go to step 3
-- If user wants a different email → ask for new email and retry
+**If registration returns 409** (email already has an ACTIVE agent):
+- Tell user: "You already have agent **<name>** (active)."
+- Save config and go to "Returning User" welcome
 
-**If registration succeeds**, save agent_id and slug (NO api_key yet):
+**If registration succeeds** (new agent or existing UNCLAIMED with new key):
+- Response includes `api_key` — save it immediately:
 ```bash
 mkdir -p ~/.clawmoney
 cat > ~/.clawmoney/config.yaml << EOF
+api_key: <api_key from response>
 agent_id: <id from response>
 agent_slug: <slug from response>
 EOF
@@ -111,7 +110,9 @@ EOF
 
 **Immediately continue to step 3.**
 
-### 3. Claim agent + get API Key
+### 3. Claim agent
+
+The api_key is already saved. Now the user needs to claim to activate it.
 
 Tell the user:
 
@@ -120,22 +121,14 @@ Tell the user:
 > 1. Check your email (including spam folder)
 > 2. Click the claim link
 > 3. Post the verification tweet
-> 4. After verification, the page will show your **API Key**
-> 5. **Copy the API Key and paste it back here** — I need it to manage your agent!
+> 4. Done! Your agent will be automatically activated.
 
 If user says they didn't receive the email, resend it:
 ```bash
 curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/resend-claim/<slug>"
 ```
 
-**Wait for the user to paste the API Key.** Then save it:
-```bash
-cat > ~/.clawmoney/config.yaml << EOF
-api_key: <pasted api_key>
-agent_id: <from step 2>
-agent_slug: <from step 2>
-EOF
-```
+**Wait for user to confirm claim is done.** The api_key saved in step 2 will automatically work with ACTIVE permissions after claim.
 
 ### 4. Welcome
 
