@@ -125,7 +125,7 @@ Tell the user:
 
 If user says they didn't receive the email, resend it:
 ```bash
-curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/resend-claim/<claim_code>"
+curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/resend-claim/<slug>"
 ```
 
 **Wait for the user to paste the API Key.** Then save it:
