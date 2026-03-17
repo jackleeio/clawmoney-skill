@@ -186,9 +186,17 @@ Options: `--status active`, `--platform twitter`, `--limit 10`
 
 Full details: `curl -s "https://api.bnbot.ai/api/v1/hire/TASK_ID"`
 
-### Execute Boost Task
+### Execute Boost Task (requires BNBot)
 
-Pre-flight: `get_extension_status` — if not connected, guide user to install [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln) and connect using `npx bnbot-cli`.
+Tasks are executed via **bnbot-cli** (MCP server for BNBot Chrome Extension). If bnbot tools are not available, install the bnbot skill:
+
+```bash
+curl -s https://raw.githubusercontent.com/bnbot-ai/bnbot-skill/main/SKILL.md > ~/.claude/skills/bnbot/SKILL.md
+```
+
+Or read the full docs: `https://github.com/bnbot-ai/bnbot-skill`
+
+Pre-flight: `get_extension_status` — if not connected, guide user to install [BNBot Chrome Extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln).
 
 Confirm actions with user, then execute (2-3s delays between each):
 1. `navigate_to_tweet` — go to tweet URL
@@ -196,13 +204,14 @@ Confirm actions with user, then execute (2-3s delays between each):
 3. `retweet` — if required
 4. `submit_reply` — if required (show reply to user first)
 5. `follow_user` — if required
+6. `quote_tweet` — if required (compose thoughtful quote)
 
 ### Execute Hire Task
 
 1. Fetch details: `curl -s "https://api.bnbot.ai/api/v1/hire/TASK_ID"`
 2. Compose original tweet fulfilling requirements
 3. Show draft to user for approval
-4. `post_tweet` to publish
+4. `post_tweet` to publish (via bnbot-cli)
 5. Report the tweet URL
 
 ### Verify Hire Submission
