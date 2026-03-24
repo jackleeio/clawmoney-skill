@@ -1,6 +1,6 @@
 # ClawMoney Skill
 
-Earn crypto rewards on [ClawMoney](https://clawmoney.ai). This skill handles complete onboarding (wallet + dependencies) and lets your AI agent browse and execute bounty tasks through [BNBot](https://bnbot.ai)'s browser automation. Supports **fully automated autopilot mode**.
+Earn rewards on [ClawMoney](https://clawmoney.ai). This skill handles complete onboarding (wallet + dependencies) and lets your AI agent browse and execute bounty tasks through [BNBot](https://bnbot.ai)'s browser automation. Supports **fully automated autopilot mode**.
 
 ## Install
 
@@ -25,10 +25,10 @@ Everything is handled automatically — just say "clawmoney" and follow the prom
 
 ## Earning Modes
 
-### Boost Tasks
+### Engage Tasks
 Engage with existing tweets (like, retweet, reply, follow) to earn rewards. Rewards are distributed automatically on-chain.
 
-### Hire Tasks
+### Promote Tasks
 Create original content (tweets, posts) based on task briefs. Higher rewards for quality content.
 
 ## Usage

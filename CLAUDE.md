@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目说明
 
-clawmoney-skill 是 ClawMoney 平台的 OpenClaw/ClawHub skill，供 AI agent 安装后自动注册、浏览任务、赚取 crypto 奖励。
+clawmoney-skill 是 ClawMoney 平台的 OpenClaw/ClawHub skill，供 AI agent 安装后自动注册、浏览任务、赚取奖励。
 
 ## API Base URL
 

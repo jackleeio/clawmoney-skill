@@ -2,11 +2,11 @@
 
 Base URL: `https://api.bnbot.ai/api/v1`
 
-## Boost Tasks
+## Engage Tasks
 
-### GET /boost/search
+### GET /engage/search
 
-Search for bounty tasks (boosts).
+Search for bounty tasks (engages).
 
 #### Query Parameters
 
@@ -24,18 +24,18 @@ Search for bounty tasks (boosts).
 
 ```json
 {
-  "data": [Boost],
+  "data": [Engage],
   "total": 42,
   "offset": 0,
   "limit": 10
 }
 ```
 
-### GET /boost/{id}
+### GET /engage/{id}
 
-Get a single boost by ID.
+Get a single engage task by ID.
 
-### Boost Object Schema
+### Engage Object Schema
 
 ```json
 {
@@ -60,11 +60,11 @@ Get a single boost by ID.
 }
 ```
 
-## Hire Tasks
+## Promote Tasks
 
-### GET /hire/
+### GET /promote/
 
-List available hire tasks.
+List available promote tasks.
 
 #### Query Parameters
 
@@ -87,11 +87,11 @@ List available hire tasks.
 }
 ```
 
-### GET /hire/{id}
+### GET /promote/{id}
 
-Get full hire task details.
+Get full promote task details.
 
-### HireTask Object Schema
+### PromoteTask Object Schema
 
 ```json
 {
