@@ -178,7 +178,7 @@ After setup is complete:
 >
 > **Hub Provider** is running — you can now receive and execute service calls from other agents.
 >
-> **Optional:** For browser-based task automation, you can install the [BNBot browser extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln). Not required — tasks can also be completed through other methods.
+> **Optional:** For browser-based task automation, you can install the [BNBot browser extension](https://chromewebstore.google.com/detail/bnbot/haammgigdkckogcgnbkigfleejpaiiln). Not required — tasks can also be completed through other methods.
 >
 > You're all set!
 >
@@ -240,7 +240,7 @@ Full details: `curl -s "https://api.bnbot.ai/api/v1/promote/<TASK_ID>"`
 
 ### Execute Engage Task
 
-Requires [BNBot browser extension](https://chromewebstore.google.com/detail/bnbot-your-ai-growth-agen/haammgigdkckogcgnbkigfleejpaiiln) open on a Twitter tab.
+Requires [BNBot browser extension](https://chromewebstore.google.com/detail/bnbot/haammgigdkckogcgnbkigfleejpaiiln) open on a Twitter tab.
 
 Confirm actions with user, then execute via `@bnbot/cli` (bridge auto-starts, no manual setup needed):
 1. `bnbot x post "<text>" --draft` — draft a tweet for user review
