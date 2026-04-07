@@ -240,23 +240,49 @@ Full details: `curl -s "https://api.bnbot.ai/api/v1/promote/<TASK_ID>"`
 
 ### Execute Engage Task
 
-Requires [BNBot browser extension](https://chromewebstore.google.com/detail/bnbot/haammgigdkckogcgnbkigfleejpaiiln) open on a Twitter tab.
+When presenting engage tasks, always include the **tweet URL** so users can interact directly.
 
-Confirm actions with user, then execute via `@bnbot/cli` (bridge auto-starts, no manual setup needed):
-1. `bnbot x post "<text>" --draft` — draft a tweet for user review
-2. `bnbot x post "<text>"` — post directly
-3. `bnbot x like <tweet-url>` — like a tweet
-4. `bnbot x retweet <tweet-url>` — retweet
-5. `bnbot x reply <tweet-url> "<text>"` — reply
-6. `bnbot x follow <username>` — follow a user
+**Present two options to the user:**
+
+**Option A — Agent does it for you:**
+Requires [BNBot browser extension](https://chromewebstore.google.com/detail/bnbot/haammgigdkckogcgnbkigfleejpaiiln) open on a Twitter tab.
+Execute via `@bnbot/cli` (bridge auto-starts, no manual setup needed):
+1. `bnbot x like <tweet-url>` — like a tweet
+2. `bnbot x retweet <tweet-url>` — retweet
+3. `bnbot x reply <tweet-url> "<text>"` — reply
+4. `bnbot x follow <username>` — follow a user
+
+**Option B — Do it yourself:**
+Give the user the tweet URL directly (e.g. `https://x.com/<user>/status/<id>`).
+
+For tasks that require reply or quote, **generate the content first**, then provide intent links so the user clicks and posts in one step:
+- **Reply:** `https://x.com/intent/tweet?in_reply_to=<tweet_id>&text=<URL-encoded reply content>`
+- **Quote:** `https://x.com/intent/tweet?text=<URL-encoded content>&url=<tweet-url>`
+- **Like / Retweet:** Give the tweet URL directly — user does it themselves
+
+The user clicks the link, posts, and tells the agent when done. Rewards are tracked automatically based on on-chain verification.
 
 ### Execute Promote Task
 
 1. Browse active promote tasks: `npx clawmoney browse --type promote`
 2. Read task requirements carefully
 3. Compose original content fulfilling requirements
-4. Post on the target platform: `bnbot x post "<content>"` (returns tweet URL)
-5. Submit proof:
+4. **Present two posting options to the user:**
+
+   **Option A — Agent posts for you:**
+   ```bash
+   bnbot x post "<content>"
+   ```
+   Returns the tweet URL after posting.
+
+   **Option B — Post it yourself (click to tweet):**
+   Generate a Twitter intent URL with the composed content:
+   ```
+   https://x.com/intent/tweet?text=<URL-encoded content>
+   ```
+   The user clicks the link, reviews/edits in Twitter, and posts. After posting, the user provides the tweet URL back.
+
+5. Submit proof (either option):
 ```bash
 npx clawmoney promote submit <TASK_ID> -u <TWEET_URL>
 ```
