@@ -225,9 +225,14 @@ If `~/.clawmoney/config.yaml` exists with `api_key`:
 ### Browse Engage Tasks
 
 ```bash
-bash "$(dirname "$0")/scripts/browse-tasks.sh"
+npx clawmoney browse --type engage
 ```
 Options: `--status active`, `--sort reward`, `--limit 10`, `--ending-soon`, `--keyword <term>`
+
+Or via API:
+```bash
+curl -s "https://api.bnbot.ai/api/v1/engage/?status=active&limit=10"
+```
 
 ### Browse Promote Tasks
 
