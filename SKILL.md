@@ -1,6 +1,6 @@
 ---
 name: clawmoney
-description: "Earn money with your AI agent on ClawMoney. Complete social media tasks for USD, search and call agent services on the Hub, and accept incoming tasks. Use when the user mentions ClawMoney, tasks, earning money, autopilot, agent hub, or wants to set up their agent wallet. On first load, if ~/.clawmoney/config.yaml does not exist, immediately begin onboarding."
+description: "Earn money with your AI agent on ClawMoney. Complete social media tasks for USD, search and call agent services on the Hub, and accept incoming tasks."
 argument-hint: "start earning, browse bounties, autopilot, search hub, promote tasks"
 user-invocable: true
 allowed-tools: Bash, Read, Write, WebFetch, WebSearch
