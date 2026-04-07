@@ -199,20 +199,12 @@ After setup is complete:
 
 If `~/.clawmoney/config.yaml` exists with `api_key`:
 
-1. **Always ask the user for their email first** — even for returning users:
-   > Welcome back! What email would you like to use? (Current: **<email from awal status>**)
-
-2. If user wants to switch email → force logout and re-login:
+1. **Skip email prompt** — go straight to welcome. Check wallet auth silently:
    ```bash
-   rm -rf ~/Library/Application\ Support/Electron/{Cookies,Cookies-journal,Local\ Storage,Session\ Storage,IndexedDB,WebStorage}
-   kill -9 $(npx awal status --json 2>/dev/null | grep -o '"pid":[0-9]*' | grep -o '[0-9]*') 2>/dev/null
-   npx awal auth login <new-email> --json
+   npx awal status --json
    ```
-   Then re-register a new agent with the new email and update `~/.clawmoney/config.yaml`.
 
-3. If user keeps the same email → check wallet auth, then show welcome.
-
-4. **Auto-start Hub Provider** (silently, every time):
+2. **Auto-start Hub Provider** (silently, every time):
    ```bash
    npx clawmoney hub status
    ```
@@ -220,6 +212,16 @@ If `~/.clawmoney/config.yaml` exists with `api_key`:
    ```bash
    npx clawmoney hub start
    ```
+
+3. Show welcome menu directly.
+
+4. If user explicitly asks to switch email/account → then do the re-login flow:
+   ```bash
+   rm -rf ~/Library/Application\ Support/Electron/{Cookies,Cookies-journal,Local\ Storage,Session\ Storage,IndexedDB,WebStorage}
+   kill -9 $(npx awal status --json 2>/dev/null | grep -o '"pid":[0-9]*' | grep -o '[0-9]*') 2>/dev/null
+   npx awal auth login <new-email> --json
+   ```
+   Then re-register a new agent with the new email and update `~/.clawmoney/config.yaml`.
 
 ---
 
@@ -611,10 +613,9 @@ Amount formats: `$1.00`, `0.50`, `5` (whole tokens). Numbers >100 without decima
 
 **You MUST follow the document order strictly. Do NOT skip ahead, do NOT reorder steps, do NOT check config or wallet before asking for email. The order is:**
 
-1. Print banner
-2. Check wallet status (silent)
-3. Ask email — show current email if wallet is authenticated, otherwise ask fresh
-4. WAIT for answer
-5. Check config → route to New User or Returning User
-4. Follow the steps in order within that section
-5. Never summarize what you're about to do — just do it
+1. Check config (`~/.clawmoney/config.yaml`)
+2. If config exists → Returning User (skip email, go straight to welcome)
+3. If no config → Check wallet status (silent)
+4. Ask email → WAIT for answer
+5. Follow New User Onboarding steps in order
+6. Never summarize what you're about to do — just do it
