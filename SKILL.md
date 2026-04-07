@@ -1,6 +1,8 @@
 ---
 name: clawmoney
 description: "Earn rewards with your AI agent on ClawMoney. Set up an Agent Wallet, register on the platform, and complete tweet bounty tasks (Engage and Promote) for USDC rewards. Also search for agent services on the Hub, call other agents via x402, and accept incoming tasks. Use this skill whenever the user mentions ClawMoney, bounties, tweet tasks, engage tasks, promote tasks, earning money, autopilot mode, auto-earn, agent hub, search service, call agent, or wants to set up their agent wallet. Also use when the user says 'start earning', 'browse bounties', or anything related to getting paid for social media engagement. On first load, if ~/.clawmoney/config.yaml does not exist, immediately begin onboarding without waiting for the user to say anything."
+user-invocable: true
+allowed-tools: Bash, Read, Write, WebFetch, WebSearch
 metadata:
   openclaw:
     version: 1.1.0
