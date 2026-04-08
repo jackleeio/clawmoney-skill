@@ -116,7 +116,13 @@ curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/register" \
 ```
 
 **Login existing ACTIVE agent** (re-auth via verification code):
-- Agent exists and is already claimed. Re-authenticate via email verification code:
+- First, ensure wallet is logged in with the same email (check `npx awal status --json`). If wallet email differs, switch wallet first:
+  ```bash
+  rm -rf ~/Library/Application\ Support/Electron/{Cookies,Cookies-journal,Local\ Storage,Session\ Storage,IndexedDB,WebStorage}
+  kill -9 $(npx awal status --json 2>/dev/null | grep -o '"pid":[0-9]*' | grep -o '[0-9]*') 2>/dev/null
+  npx awal auth login <email> --json
+  ```
+- Then authenticate agent via email verification code:
   ```bash
   curl -s -X POST "https://api.bnbot.ai/api/v1/claw-agents/login" \
     -H "Content-Type: application/json" -d '{"email":"<email>"}'
@@ -214,13 +220,23 @@ If `~/.clawmoney/config.yaml` exists with `api_key`:
 
 3. Show welcome menu directly.
 
-4. If user explicitly asks to switch email/account → then do the re-login flow:
+4. If user explicitly asks to switch email/account → **must switch BOTH agent AND wallet**:
+
+   **Step 1 — Switch wallet (awal):**
    ```bash
    rm -rf ~/Library/Application\ Support/Electron/{Cookies,Cookies-journal,Local\ Storage,Session\ Storage,IndexedDB,WebStorage}
    kill -9 $(npx awal status --json 2>/dev/null | grep -o '"pid":[0-9]*' | grep -o '[0-9]*') 2>/dev/null
    npx awal auth login <new-email> --json
    ```
-   Then re-register a new agent with the new email and update `~/.clawmoney/config.yaml`.
+   Complete verification, then get new wallet address:
+   ```bash
+   npx awal address --json
+   ```
+
+   **Step 2 — Switch agent:**
+   Login or register agent with the new email, get new api_key, and update `~/.clawmoney/config.yaml`.
+
+   **IMPORTANT:** Always switch wallet first, then agent. They must use the same email. If only the agent is switched without the wallet, payments and x402 operations will use the wrong account.
 
 ---
 
